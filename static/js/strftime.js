@@ -7,15 +7,20 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
   $scope.output = 'It is 7:00PM on Saturday, June 14th.';
   $scope.num = 0;
 
-  $scope.getDefaultStrftime = function() {
+  $scope.defaultStrftime = function() {
     return 'It is %s:%s%s on %s, %s %s%s.';
   };
 
-  $scope.calculate = function() {
-    if (!$scope.strftime) {
-      $scope.output = $scope.getDefaultStrftime();
-    } else {
-      $scope.output = $scope.strftime;
+  $scope.grab = function (type) {
+    var datetime = arguments.length === 2? arguments[1] : new Date();
+    if (type === 'year') {
+      return datetime.getFullYear().toString();
     }
   };
+
+  $scope.calculate = function() {
+    // $scope.output default
+    $scope.output = !$scope.strftime? $scope.defaultStrftime() : $scope.strftime;
+  };
+
 }]);
