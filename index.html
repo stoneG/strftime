@@ -11,11 +11,12 @@
 
 <body ng-controller="StrftimeController">
   <div class="container">
+    <h1 class="title">Strftime</h1>
+    <h1 class="output">{{ output }}</h1>
     <div class="input">
-      <h1 class="title">strftime:</h1>
-      <input ng-model="num" class="strftime"></input>
+      <input ng-model="strftime" ng-change="calculate()" class="strftime" placeholder="It is %s:%s%s on %s, %s %s%s."></input>
+      <button ng-click="addOne()">Copy</button>
     </div>
-    <button ng-click="addOne()">Copy</button>
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>

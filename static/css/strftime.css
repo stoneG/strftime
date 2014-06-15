@@ -2,43 +2,38 @@
 body {
   font-family: 'Nunito', Helvetica, sans-serif;
   background-color: #1f5c79;
+  color: #cde5ff;
 }
 
-/* line 10, ../sass/strftime.scss */
+/* line 11, ../sass/strftime.scss */
 .title {
-  display: inline-block;
   margin: 0;
   vertical-align: middle;
-  color: #cde5ff;
   font-size: 3em;
-  text-align: center;
 }
 
-/* line 19, ../sass/strftime.scss */
+/* line 17, ../sass/strftime.scss */
 .input {
-  text-align: center;
+  /*text-align: center;*/
 }
 
-/* line 23, ../sass/strftime.scss */
+/* line 21, ../sass/strftime.scss */
 .strftime {
-  display: inline-block;
   width: 90%;
   max-width: 400px;
   height: 40px;
   padding: 0 10px;
-  margin-left: 10px;
   vertical-align: middle;
   /*border: 3px solid #FFF3CD;*/
   border: none;
   border-radius: 3px;
-  background-color: #7ebafc;
-  color: #cde5ff;
+  color: #808080;
   text-align: left;
   font-size: 1.5em;
   outline: none;
 }
 
-/* line 41, ../sass/strftime.scss */
+/* line 36, ../sass/strftime.scss */
 .strftime:hover {
   outline: none;
 }

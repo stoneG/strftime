@@ -5,34 +5,29 @@ $secondary-color: #7EBAFC;
 body {
   font-family: 'Nunito', Helvetica, sans-serif;
   background-color: $bg-color;
+  color: $text-color;
 }
 
 .title {
-  display: inline-block;
   margin: 0;
   vertical-align: middle;
-  color: $text-color;
   font-size: 3em;
-  text-align: center;
 }
 
 .input {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .strftime {
-  display: inline-block;
   width: 90%;
   max-width: 400px;
   height: 40px;
   padding: 0 10px;
-  margin-left: 10px;
   vertical-align: middle;
   /*border: 3px solid #FFF3CD;*/
   border: none;
   border-radius: 3px;
-  background-color: $secondary-color;
-  color: $text-color;
+  color: #808080;
   text-align: left;
   font-size: 1.5em;
   outline: none;

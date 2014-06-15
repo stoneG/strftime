@@ -1,0 +1,1 @@
+describe("MainCtrl",function(){var t;beforeEach(angular.mock.module("strftimeApp")),beforeEach(angular.mock.inject(function(e,c){t=e.$new(),c("StrftimeController",{$scope:t})})),it("should calculate default strftime",function(){t.calculate(),expect(t.output).toBe(t.getDefaultStrftime())})});

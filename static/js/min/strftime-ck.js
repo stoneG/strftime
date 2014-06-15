@@ -1,0 +1,1 @@
+var strftimeApp=angular.module("strftimeApp",[]);strftimeApp.controller("StrftimeController",["$scope",function(t){t.output="It is 7:00PM on Saturday, June 14th.",t.num=0,t.getDefaultStrftime=function(){return"It is %s:%s%s on %s, %s %s%s."},t.calculate=function(){t.output=t.strftime?t.strftime:t.getDefaultStrftime()}}]);
