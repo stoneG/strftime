@@ -2,14 +2,21 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/static/css/strftime.css" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
 
   <title>STRFTIME</title>
   
 </head>
 
 <body ng-controller="StrftimeController">
-  <input type="number" ng-model="num"></input>
-  <button ng-click="addOne()">Add one</button>
+  <div class="container">
+    <div class="input">
+      <h1 class="title">strftime:</h1>
+      <input ng-model="num" class="strftime"></input>
+    </div>
+    <button ng-click="addOne()">Copy</button>
+  </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-mocks.js"></script>

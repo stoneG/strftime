@@ -1,8 +1,8 @@
 'use strict';
- 
+
 describe('MainCtrl', function(){
     var scope;//we'll use this scope in our tests
- 
+
     //mock Application to allow us to inject our own dependencies
     beforeEach(angular.mock.module('strftimeApp'));
     //mock the controller for the same reason and include $rootScope and $controller
