@@ -19,10 +19,35 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
         }
         return str;
       },
+      weekdays = {
+        0: 'Sunday',
+        1: 'Monday',
+        2: 'Tuesday',
+        3: 'Wednesday',
+        4: 'Thursday',
+        5: 'Friday',
+        6: 'Saturday'
+      },
+      months = {
+        0: 'January',
+        1: 'February',
+        2: 'March',
+        3: 'April',
+        4: 'May',
+        5: 'June',
+        6: 'July',
+        7: 'August',
+        8: 'September',
+        9: 'October',
+        10: 'November',
+        11: 'December'
+      },
       getFunc = {
         'weekdayShort': function() {
+          return weekdays[datetime.getDay()].slice(0, 3);
         },
         'weekday': function() {
+          return weekdays[datetime.getDay()];
         },
         'weekdayNum': function() {
           return datetime.getDay().toString();
@@ -31,8 +56,10 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
           return addPadding(datetime.getDate().toString(), 2);
         },
         'monthShort': function() {
+          return months[datetime.getMonth()].slice(0, 3);
         },
         'month': function() {
+          return months[datetime.getMonth()];
         },
         'monthNumPadded': function() {
           return addPadding((datetime.getMonth() + 1).toString(), 2);
@@ -50,7 +77,9 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
           return addPadding(datetime.getHours().toString(), 2);
         },
         'hour12Padded': function() {
-          return addPadding(datetime.getHours().toString(), 2);
+          var hour24 = datetime.getHours(),
+            hour12 = hour24 > 11? hour24 - 12 : hour24;
+          return addPadding(hour12.toString(), 2);
         },
         'meridian': function() {
           return datetime.getHours() < 12? 'AM' : 'PM';
@@ -62,8 +91,12 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
           return addPadding(datetime.getSeconds().toString(), 2);
         },
         'microSecondPadded': function() {
+          return addPadding(datetime.getMilliseconds().toString(), 6);
         },
         'dayOfTheYearPadded': function() {
+          var yearStart = new Date(datetime.getFullYear(), 0, 0),
+            day = 1000 * 60 * 60 * 24;
+          return Math.floor((datetime - yearStart)/day).toString();
         },
         'weekOfTheYearNumPadded': function() {
         },
