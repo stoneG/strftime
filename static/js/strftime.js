@@ -3,14 +3,18 @@
 var strftimeApp = angular.module('strftimeApp', []);
 
 strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
-  //$scope.strftime = 'It is %s:%s%s on %s, %s %s%s.';
+  // $scope.strftime = 'It is %I:%M%p on %A, %B %dth.';
   $scope.output = 'It is 7:00PM on Saturday, June 14th.';
   $scope.num = 0;
 
   $scope.defaultStrftime = function() {
-    return 'It is %s:%s%s on %s, %s %s%s.';
+    return $scope.convert('It is %I:%M%p on %A, %B %dth.');
   };
 
+  /**
+   * Grabs the specified datetime component.
+   * @returns {String} representation of datetime component.
+   */
   $scope.grab = function (type) {
     var datetime = arguments.length === 2? arguments[1] : new Date(),
       addPadding = function(str, len) {
@@ -91,9 +95,64 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
     return getFunc[type]();
   };
 
+  $scope.pyStrftime = {
+    tokens: ['a', 'A', 'w', 'd', 'b', 'B', 'm', 'y', 'Y', 'H', 'I', 'p', 'M', 'S', 'f', 'j', 'U', 'W'],
+    grabInputs: ['weekdayShort', 'weekday', 'weekdayNum', 'dayPadded', 'monthShort', 'month', 'monthNumPadded', 'yearShort', 'year', 'hour24Padded', 'hour12Padded', 'meridian', 'minutePadded', 'secondPadded', 'microSecondPadded', 'dayOfTheYearPadded', 'weekOfTheYearNumPadded', 'weekOfTheYearNum']
+  }
+
+  /**
+   * Converts strftime (%d, %t, etc...) tokens to datetime components.
+   * @returns {String} of datetime component.
+   */
+  $scope.convertToken = function(input) {
+    var datetime = arguments.length === 2? arguments[1] : new Date(),
+      strftime = {
+        '%a': 'weekdayShort',
+        '%A': 'weekday',
+        '%w': 'weekdayNum',
+        '%d': 'dayPadded',
+        '%b': 'monthShort',
+        '%B': 'month',
+        '%m': 'monthNumPadded',
+        '%y': 'yearShort',
+        '%Y': 'year',
+        //'day': '25',
+        '%H': 'hour24Padded',
+        '%I': 'hour12Padded',
+        '%p': 'meridian',
+        '%M': 'minutePadded',
+        '%S': 'secondPadded',
+        '%f': 'microSecondPadded',
+        '%j': 'dayOfTheYearPadded',
+        '%U': 'weekOfTheYearNumPadded',
+        '%W': 'weekOfTheYearNum',
+      };
+    return $scope.grab(strftime[input], datetime);
+  };
+
+  $scope.convert = function(strftime) {
+    var re = '(^|[^\%])(\%[' + $scope.pyStrftime.tokens.join('') + '])',
+      match,
+      replacer;
+
+    re = new RegExp(re, 'g');
+    replacer = function(match, p1, p2) {
+      return p1 + $scope.convertToken(p2);
+    };
+    while (match = re.exec(strftime)) {
+      strftime = strftime.replace(re, replacer);
+    }
+    console.log('matchend', match);
+    return strftime;
+  };
+
   $scope.calculate = function() {
     // $scope.output default
-    $scope.output = !$scope.strftime? $scope.defaultStrftime() : $scope.strftime;
+    if ($scope.strftime) {
+      $scope.output = $scope.convert($scope.strftime);
+    } else {
+      $scope.output = $scope.defaultStrftime();
+    }
   };
 
 }]);

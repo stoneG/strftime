@@ -6,7 +6,7 @@
   <link href='http://fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
 
   <title>STRFTIME</title>
-  
+
 </head>
 
 <body ng-controller="StrftimeController">
@@ -14,7 +14,7 @@
     <h1 class="title">Strftime</h1>
     <h1 class="output">{{ output }}</h1>
     <div class="input">
-      <input ng-model="strftime" ng-change="calculate()" class="strftime" placeholder="It is %s:%s%s on %s, %s %s%s."></input>
+      <input ng-model="strftime" ng-change="calculate()" class="strftime" placeholder="It is %I:%M%p on %A, %B %dth."></input>
       <button ng-click="addOne()">Copy</button>
     </div>
   </div>

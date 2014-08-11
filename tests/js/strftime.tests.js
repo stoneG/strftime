@@ -61,4 +61,29 @@ describe('StrftimeController', function(){
         }
       }
     });*/
+
+    it('should convert strftime strings to normal strings', function() {
+      var year = (new Date()).getFullYear().toString(),
+        input;
+
+      input = '%%Y';
+      output = '%%Y';
+      expect($scope.convert(input)).toBe(output);
+
+      input = '%Y';
+      output = year;
+      expect($scope.convert(input)).toBe(output);
+
+      input = '%Y%Y%Y%Y';
+      output = year + year + year + year;
+      expect($scope.convert(input)).toBe(output);
+
+      input = ' %Y';
+      output = ' ' + year;
+      expect($scope.convert(input)).toBe(output);
+
+      input = 'is it %Y or %Y?';
+      output = 'is it ' + year + ' or ' + year + '?';
+      expect($scope.convert(input)).toBe(output);
+    });
 });
