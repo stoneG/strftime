@@ -22,33 +22,39 @@ describe('StrftimeController', function(){
       'weekdayShort': 'Wed',
       'weekday': 'Wednesday',
       'weekdayNum': '3',
+      'day': '25',
       'dayPadded': '25',
       'monthShort': 'Dec',
+      'monthShortLower': 'dec',
       'month': 'December',
+      'monthNum': '12',
       'monthNumPadded': '12',
       'yearShort': '13',
       'year': '2013',
-      'day': '25',
+      'hour24': '17',
+      'hour12': '5',
       'hour24Padded': '17',
       'hour12Padded': '05',
       'meridian': 'PM',
+      'meridianPeriod': 'p.m.',
       'minutePadded': '15',
       'secondPadded': '30',
       'microSecondPadded': '000000',
       'dayOfTheYearPadded': '359',
       'weekOfTheYearNumPadded': '51',
       'weekOfTheYearNum': '51',
+      'timeDjango': '5:15',
     };
     function grabTests(input, output) {
-      it('should be able to grab ' + input + ' of a Date object', function() {
-        expect($scope.grab(input, datetime)).toBe(output);
-      });
+      expect($scope.grab(input, datetime)).toBe(output);
     }
-    for (var key in results) {
-      if (results.hasOwnProperty(key)) {
-        grabTests(key, results[key]);
+    it('should be able to grab any component from a Date object', function() {
+      for (var key in results) {
+        if (results.hasOwnProperty(key)) {
+          grabTests(key, results[key]);
+        }
       }
-    }
+    });
 
     /*it('should parse strftime units', function() {
       var io = {
