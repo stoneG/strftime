@@ -89,12 +89,20 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
           return addPadding(datetime.getSeconds().toString(), 2);
         },
         'microSecondPadded': function() {
+          return datetime.getMilliseconds().toString();
+        },
+        'microSecondPadded': function() {
           return addPadding(datetime.getMilliseconds().toString(), 6);
+        },
+        'dayOfTheYear': function() {
+          var yearStart = new Date(datetime.getFullYear(), 0, 0),
+            day = 1000 * 60 * 60 * 24;
+          return Math.floor((datetime - yearStart)/day).toString();
         },
         'dayOfTheYearPadded': function() {
           var yearStart = new Date(datetime.getFullYear(), 0, 0),
             day = 1000 * 60 * 60 * 24;
-          return Math.floor((datetime - yearStart)/day).toString();
+          return addPadding(Math.floor((datetime - yearStart)/day).toString(), 3);
         },
         'weekOfTheYearNumPadded': function() {
           var yearStart = new Date(datetime.getFullYear(), 0, 0),
@@ -124,43 +132,43 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
         'y', 'Y', 'z',/* 'Z' */],
       grabInputs: [],
       mapping: {
-        a: 'tba',
-        A: 'tba',
-        b: 'tba',
-        d: 'tba',
-        D: 'tba',
+        a: 'meridainPeriod',
+        A: 'meridain',
+        b: 'monthShortLower',
+        d: 'dayPadded',
+        D: 'weekdayShort',
         // e: 'tba',
         // E: 'tba',
         // f: 'tba',
-        F: 'tba',
-        g: 'tba',
-        G: 'tba',
-        h: 'tba',
-        H: 'tba',
-        i: 'tba',
+        F: 'month',
+        g: 'hour12',
+        G: 'hour24',
+        h: 'hour12Padded',
+        H: 'hour24Padded',
+        i: 'minutePadded',
         // I: 'tba',
-        j: 'tba',
-        l: 'tba',
+        j: 'day',
+        l: 'weekday',
         // L: 'tba',
-        m: 'tba',
-        M: 'tba',
-        n: 'tba',
+        m: 'monthNumPadded',
+        M: 'monthShort',
+        n: 'monthNum',
         // N: 'tba',
         // o: 'tba',
         // TODO O: 'tba',
         // P: 'tba',
         // r: 'tba',
-        s: 'tba',
+        s: 'secondPadded',
         // TODO S: 'tba',
         // TODO t: 'tba',
         // TODO T: 'tba',
-        u: 'tba',
+        u: 'microSecondPadded',
         // U: 'tba',
-        w: 'tba',
-        W: 'tba',
-        y: 'tba',
-        Y: 'tba',
-        z: 'tba',
+        w: 'weekdayNum',
+        W: 'weekOfTheYearNum',
+        y: 'yearShort',
+        Y: 'year',
+        z: 'dayOfTheYear',
         // Z: 'tba',
       }
     },
