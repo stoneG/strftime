@@ -8,6 +8,7 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
   $scope.num = 0;
 
   $scope.defaultStrftime = function() {
+    console.log('defaultStrftime');
     return $scope.convert('It is %I:%M%p on %A, %B %dth.');
   };
 
@@ -120,6 +121,7 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
           return this.hour12() + minutes;
         }
       };
+    console.log('grab type', type);
     return getFunc[type]();
   };
 
@@ -132,8 +134,8 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
         'y', 'Y', 'z',/* 'Z' */],
       grabInputs: [],
       mapping: {
-        a: 'meridainPeriod',
-        A: 'meridain',
+        a: 'meridianPeriod',
+        A: 'meridian',
         b: 'monthShortLower',
         d: 'dayPadded',
         D: 'weekdayShort',
@@ -173,7 +175,7 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
       }
     },
     python: {
-      prefix: '%',
+      prefix: '\%',
       tokens: ['a', 'A', 'w', 'd', 'b', 'B', 'm', 'y', 'Y', 'H', 'I', 'p',
         'M', 'S', 'f', 'j', 'U', 'W'],
       grabInputs: ['weekdayShort', 'weekday', 'weekdayNum', 'dayPadded',
@@ -213,48 +215,54 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
    */
   $scope.convertToken = function(input) {
     var datetime = arguments.length === 2? arguments[1] : new Date(),
-      strftime = {
-        '%a': 'weekdayShort',
-        '%A': 'weekday',
-        '%w': 'weekdayNum',
-        '%d': 'dayPadded',
-        '%b': 'monthShort',
-        '%B': 'month',
-        '%m': 'monthNumPadded',
-        '%y': 'yearShort',
-        '%Y': 'year',
-        //'day': '25',
-        '%H': 'hour24Padded',
-        '%I': 'hour12Padded',
-        '%p': 'meridian',
-        '%M': 'minutePadded',
-        '%S': 'secondPadded',
-        '%f': 'microSecondPadded',
-        '%j': 'dayOfTheYearPadded',
-        '%U': 'weekOfTheYearNumPadded',
-        '%W': 'weekOfTheYearNum',
-      };
+      strftime = {};
+    for (var key in $scope.strftime.mapping) {
+      if ($scope.strftime.mapping.hasOwnProperty(key)) {
+        strftime[$scope.strftime.prefix + key] = $scope.strftime.mapping[key];
+      }
+    }
+    console.log(strftime);
+    console.log(input);
     return $scope.grab(strftime[input], datetime);
   };
 
   $scope.convert = function(input) {
-    var re = '(^|[^\%])(\%[' + $scope.strftime.tokens.join('') + '])',
+    var re,
       match,
-      replacer;
+      replacer, replacer1, replacer2,
+      prefix = $scope.strftime.prefix;
 
-    re = new RegExp(re, 'g');
-    replacer = function(match, p1, p2) {
+    replacer1 = function(match, p1) {
+      console.log(match, p1);
+      return $scope.convertToken(p1);
+    };
+    replacer2 = function(match, p1, p2) {
+      console.log(match, p1, p2);
       return p1 + $scope.convertToken(p2);
     };
+    if (prefix) {
+      re = '(^|[^' + prefix + '])(' + prefix + '[' + $scope.strftime.tokens.join('') + '])';
+      re = new RegExp(re, 'g');
+      replacer = replacer2
+    } else {
+      re = '([' + $scope.strftime.tokens.join('') + '])';
+      re = new RegExp(re, 'g');
+      replacer = replacer1
+    }
+
     while (match = re.exec(input)) {
+      console.log(match, '?=', re.exec(input));
       input = input.replace(re, replacer);
     }
+    console.log('convert input', input);
     return input;
   };
 
   $scope.calculate = function() {
     // $scope.output default
     if ($scope.input) {
+      console.log('got input of', $scope.input);
+      //debugger;
       $scope.output = $scope.convert($scope.input);
     } else {
       $scope.output = $scope.defaultStrftime();
