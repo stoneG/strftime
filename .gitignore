@@ -4,3 +4,4 @@ node_modules
 config.codekit
 .DS_Store
 static/js/min/strftime-ck.js
+wireframe.md

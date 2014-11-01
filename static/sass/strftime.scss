@@ -8,10 +8,18 @@ body {
   color: $text-color;
 }
 
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+}
+
 .title {
   margin: 0;
   vertical-align: middle;
-  font-size: 3em;
+  font-size: 4em;
 }
 
 .input {
@@ -23,10 +31,12 @@ body {
   max-width: 400px;
   height: 40px;
   padding: 0 10px;
-  vertical-align: middle;
+  vertical-align: top;
   /*border: 3px solid #FFF3CD;*/
   border: none;
-  border-radius: 3px;
+  border-bottom: 3px solid #164D67;
+  border-radius: 0;
+  background-color: #30708E;
   color: #808080;
   text-align: left;
   font-size: 1.5em;
@@ -35,4 +45,22 @@ body {
 
 .strftime:hover {
   outline: none;
+}
+
+.copy {
+  vertical-align: top;
+  height: 40px;
+  width: 100px;
+  margin-left: 1%;
+  padding: 0;
+  background-color: #30708E;
+  color: $text-color;
+  border: 0;
+  border-bottom: 3px solid $bg-color;
+  font-size: 1.5em;
+  -webkit-appearance: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

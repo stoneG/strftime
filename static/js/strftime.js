@@ -262,11 +262,11 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
     // $scope.output default
     if ($scope.input) {
       console.log('got input of', $scope.input);
-      //debugger;
       $scope.output = $scope.convert($scope.input);
     } else {
       $scope.output = $scope.defaultStrftime();
     }
   };
+  $scope.calculate();
 
 }]);
