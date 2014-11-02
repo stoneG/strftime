@@ -202,7 +202,29 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
         'j': 'dayOfTheYearPadded',
         'U': 'weekOfTheYearNumPadded',
         'W': 'weekOfTheYearNum',
-      }
+      },
+      autocompleteTokens: [
+        {
+          type: 'day',
+          description: 'weekday short name',
+          mapping: 'a'
+        },
+        {
+          type: 'day',
+          description: 'weekday name',
+          mapping: 'A'
+        },
+        {
+          type: 'hour',
+          description: 'hour 24',
+          mapping: 'H'
+        },
+        {
+          type: 'hour',
+          description: 'hour 12',
+          mapping: 'I'
+        }
+      ]
     }
   };
 
@@ -258,15 +280,34 @@ strftimeApp.controller('StrftimeController', ['$scope', function($scope) {
     return input;
   };
 
+  $scope.setInputLastWord = function() {
+    var inputWords,
+      inputLastWord;
+    if ($scope.input) {
+      inputWords = $scope.input.split(' ');
+      inputLastWord = inputWords[inputWords.length-1];
+      $scope.inputLastWord = inputLastWord != ''? inputLastWord : undefined;
+      console.log('!!!!', $scope.inputLastWord);
+    } else {
+      $scope.inputLastWord = undefined;
+    }
+  };
+
   $scope.calculate = function() {
     // $scope.output default
     if ($scope.input) {
       console.log('got input of', $scope.input);
+      $scope.setInputLastWord();
       $scope.output = $scope.convert($scope.input);
     } else {
+      $scope.setInputLastWord();
       $scope.output = $scope.defaultStrftime();
     }
   };
   $scope.calculate();
+
+  $scope.selectToken = function(token) {
+    $scope.input += token.mapping;
+  }
 
 }]);

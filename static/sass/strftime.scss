@@ -2,6 +2,9 @@ $bg-color: #1F5C79;
 $text-color: #CDE5FF;
 $secondary-color: #7EBAFC;
 
+$input-width: 90%;
+$input-max-width: 400px;
+
 body {
   font-family: 'Nunito', Helvetica, sans-serif;
   background-color: $bg-color;
@@ -27,9 +30,9 @@ body {
 }
 
 .strftime {
-  width: 90%;
-  max-width: 400px;
-  height: 40px;
+  width: $input-width;
+  max-width: $input-max-width;
+  height: 50px;
   padding: 0 10px;
   vertical-align: top;
   /*border: 3px solid #FFF3CD;*/
@@ -49,7 +52,7 @@ body {
 
 .copy {
   vertical-align: top;
-  height: 40px;
+  height: 50px;
   width: 100px;
   margin-left: 1%;
   padding: 0;
@@ -62,5 +65,24 @@ body {
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.autocompletion {
+  width: $input-width;
+  max-width: $input-max-width;
+
+  .entry {
+    padding: 2px 6px;
+
+    .type {
+      display: inline-block;
+      width: 20%;
+    }
+
+    .description {
+      display: inline-block;
+      width: 80%;
+    }
   }
 }

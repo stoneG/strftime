@@ -17,6 +17,12 @@
       <input ng-model="input" ng-change="calculate()" class="strftime" placeholder="It is %I:%M%p on %A, %B %dth."></input>
       <button class="copy" ng-click="addOne()">Copy</button>
     </div>
+    <div class="autocompletion">
+      <div class="entry" ng-repeat="token in strftime.autocompleteTokens | filter:inputLastWord" ng-click="selectToken(token)">
+        <div class="type">{{ token.type }}</div><!--
+        --><div class="description">{{ token.description }}</div>
+      </div>
+    </div>
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>

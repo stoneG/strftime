@@ -1,39 +1,39 @@
-/* line 5, ../sass/strftime.scss */
+/* line 8, ../sass/strftime.scss */
 body {
   font-family: 'Nunito', Helvetica, sans-serif;
   background-color: #1f5c79;
   color: #cde5ff;
 }
 
-/* line 11, ../sass/strftime.scss */
+/* line 14, ../sass/strftime.scss */
 .container {
   width: 1000px;
   margin: 0 auto;
 }
 @media screen and (max-width: 1000px) {
-  /* line 11, ../sass/strftime.scss */
+  /* line 14, ../sass/strftime.scss */
   .container {
     width: 100%;
   }
 }
 
-/* line 19, ../sass/strftime.scss */
+/* line 22, ../sass/strftime.scss */
 .title {
   margin: 0;
   vertical-align: middle;
   font-size: 4em;
 }
 
-/* line 25, ../sass/strftime.scss */
+/* line 28, ../sass/strftime.scss */
 .input {
   /*text-align: center;*/
 }
 
-/* line 29, ../sass/strftime.scss */
+/* line 32, ../sass/strftime.scss */
 .strftime {
   width: 90%;
   max-width: 400px;
-  height: 40px;
+  height: 50px;
   padding: 0 10px;
   vertical-align: top;
   /*border: 3px solid #FFF3CD;*/
@@ -47,15 +47,15 @@ body {
   outline: none;
 }
 
-/* line 46, ../sass/strftime.scss */
+/* line 49, ../sass/strftime.scss */
 .strftime:hover {
   outline: none;
 }
 
-/* line 50, ../sass/strftime.scss */
+/* line 53, ../sass/strftime.scss */
 .copy {
   vertical-align: top;
-  height: 40px;
+  height: 50px;
   width: 100px;
   margin-left: 1%;
   padding: 0;
@@ -66,7 +66,27 @@ body {
   font-size: 1.5em;
   -webkit-appearance: none;
 }
-/* line 63, ../sass/strftime.scss */
+/* line 66, ../sass/strftime.scss */
 .copy:hover {
   cursor: pointer;
+}
+
+/* line 71, ../sass/strftime.scss */
+.autocompletion {
+  width: 90%;
+  max-width: 400px;
+}
+/* line 75, ../sass/strftime.scss */
+.autocompletion .entry {
+  padding: 2px 6px;
+}
+/* line 78, ../sass/strftime.scss */
+.autocompletion .entry .type {
+  display: inline-block;
+  width: 20%;
+}
+/* line 83, ../sass/strftime.scss */
+.autocompletion .entry .description {
+  display: inline-block;
+  width: 80%;
 }
